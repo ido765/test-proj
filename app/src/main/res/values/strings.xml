@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ProjProb</string>
+
+    <!-- Color choices for the background -->
+    <string-array name="color_choices">
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Yellow</item>
+    </string-array>
+
+</resources>
