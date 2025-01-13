@@ -60,10 +60,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBackgroundColor(String color) {
-        // Updates the background color of the main layout
-        ConstraintLayout mainLayout = findViewById(androidx.constraintlayout.widget.R.id.match_constraint); // Ensure your root layout has this ID
-        mainLayout.setBackgroundColor(Color.parseColor(color));
+        ConstraintLayout mainLayout = findViewById(R.id.main_layout); // Ensure this matches your XML ID
+        if (mainLayout != null) {
+            try {
+                mainLayout.setBackgroundColor(Color.parseColor(color));
+            } catch (IllegalArgumentException e) {
+                // Ignore the error if the color format is invalid
+            }
+        }
     }
+
+
 
     @Override
     public void onClick(View v) {
