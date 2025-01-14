@@ -9,57 +9,32 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class FBmodule {
-    private MainActivity mainActivity;
+    MainActivity gameActivity;
 
-    public FBmodule(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public FBmodule(MainActivity gameActivity) {
+        this.gameActivity = gameActivity;
 
+        // Initializes Firebase and listens for changes in the "size" node
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference Reference = firebaseDatabase.getReference("size");
 
-        // Listener for background color
-        DatabaseReference colorReference = firebaseDatabase.getReference("color");
-        colorReference.addValueEventListener(new ValueEventListener() {
+        Reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String color = snapshot.getValue(String.class);
-                if (color != null) {
-                    mainActivity.setBackgroundColor(color);
-                }
+                String str = snapshot.getValue(String.class); // Retrieves the size from Firebase
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle errors if needed
-            }
-        });
-
-        // Listener for grid size
-        DatabaseReference sizeReference = firebaseDatabase.getReference("size");
-        sizeReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String size = snapshot.getValue(String.class);
-                if (size != null) {
-                    mainActivity.setGridSize(size);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle errors if needed
+                // Handles any errors during the data fetch
             }
         });
     }
 
-    public void changeBackgroundColorInFirebase(String color) {
+    public void ChangeSizeInFirebase(String size) {
+        // Updates the size value in Firebase
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference colorReference = firebaseDatabase.getReference("color");
-        colorReference.setValue(color);
-    }
-
-    public void changeSizeInFirebase(String size) {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference sizeReference = firebaseDatabase.getReference("size");
-        sizeReference.setValue(size);
+        DatabaseReference Reference = firebaseDatabase.getReference("size");
+        Reference.setValue(size); // Saves the new size value
     }
 }
