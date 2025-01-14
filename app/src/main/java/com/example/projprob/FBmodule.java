@@ -1,4 +1,4 @@
-package com.example.trivia2024inclass;
+package com.example.projprob;
 
 import androidx.annotation.NonNull;
 
@@ -8,10 +8,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Fbmodule {
+public class FBmodule {
     private MainActivity mainActivity;
 
-    public Fbmodule(MainActivity mainActivity) {
+    public FBmodule(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
