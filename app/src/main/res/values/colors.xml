@@ -2,5 +2,23 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <?xml version="1.0" encoding="utf-8"?>
+
+        <color name="primary_button">#FFC107</color>
+        <color name="secondary_button">#2196F3</color>
+        <color name="button_text">#FFFFFF</color>
+        <color name="text_color">#000000</color>
+        <color name="default_background">#FFFFFF</color>
+
+        <!-- Background color options -->
+        <color name="background_black">#000000</color>
+        <color name="background_white">#FFFFFF</color>
+        <color name="background_blue">#E3F2FD</color>
+        <color name="background_red">#FFEBEE</color>
+        <color name="background_green">#E8F5E9</color>
+
+        <!-- Button colors for different backgrounds -->
+        <color name="button_text_dark">#FFFFFF</color>
+        <color name="button_text_light">#000000</color>
 
 </resources>
