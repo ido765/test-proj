@@ -1,6 +1,7 @@
 package com.example.projprob;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,14 +10,18 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button Backset;
+    private Button BackSet;
     private Spinner sizeSpinner;
     private Spinner colorSpinner;
     private boolean isFirstTimeSize = true;
     private boolean isFirstTimeColor = true;
+    private String selectedSize;
+    private ConstraintLayout SettingsLayout;
 
     // Available options for spinners
     String[] sizes = {"choose grid size", "4x4", "5x5", "6x6", "7x7"};
@@ -28,12 +33,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_settings);
         init();
         setupSpinners();
+        updateBackgroundColors();
     }
 
     private void init() {
         // Initialize back button
-        Backset = findViewById(R.id.back_set);
-        Backset.setOnClickListener(this);
+        BackSet = findViewById(R.id.back_set);
+        BackSet.setOnClickListener(this);
+
+        SettingsLayout = findViewById(R.id.setting_layout);
     }
 
     private void setupSpinners() {
@@ -48,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (!isFirstTimeSize && position > 0) {
-                    String selectedSize = sizes[position];
+                    selectedSize = sizes[position];
                     sendResult("size", selectedSize);
                 }
                 isFirstTimeSize = false;
@@ -90,45 +98,78 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         Intent resultIntent = new Intent();
         resultIntent.putExtra(key, value);
         setResult(RESULT_OK, resultIntent);
-        finish();
+        //finish();
     }
 
     @Override
     public void onClick(View v) {
-        if (v == Backset) {
+        if (v == BackSet) {
             // Return to MainActivity
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            // Intent intent = new Intent(this, MainActivity.class);
+            //startActivity(intent);
             finish();
         }
     }
 
-    // Helper method to load current settings from Firebase
-    private void loadCurrentSettings() {
-        FirebaseDatabase.getInstance().getReference("size").get()
-                .addOnSuccessListener(snapshot -> {
-                    String currentSize = snapshot.getValue(String.class);
-                    if (currentSize != null) {
-                        for (int i = 0; i < sizes.length; i++) {
-                            if (sizes[i].equals(currentSize)) {
-                                sizeSpinner.setSelection(i);
-                                break;
-                            }
-                        }
-                    }
-                });
+    public void updateBackgroundColors() {
+        int colorRes;
 
-        FirebaseDatabase.getInstance().getReference("backgroundColor").get()
-                .addOnSuccessListener(snapshot -> {
-                    String currentColor = snapshot.getValue(String.class);
-                    if (currentColor != null) {
-                        for (int i = 0; i < colors.length; i++) {
-                            if (colors[i].equals(currentColor)) {
-                                colorSpinner.setSelection(i);
-                                break;
-                            }
-                        }
-                    }
-                });
+        String color = MainActivity.staticColorRes;
+
+        switch (color.toLowerCase()) {
+            case "black":
+                colorRes = Color.BLACK;
+                break;
+            case "white":
+                colorRes = Color.WHITE;
+                break;
+            case "blue":
+                colorRes = Color.BLUE;
+                break;
+            case "red":
+                colorRes = Color.RED;
+                break;
+            case "green":
+                colorRes = Color.GREEN;
+                break;
+            default:
+                colorRes = Color.BLACK;
+        }
+        SettingsLayout.setBackgroundColor(colorRes);
+
+//        // Update color for all buttons to ensure visibility
+//        int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
+//        btntogame.setTextColor(textColor);
+//        btntoinst.setTextColor(textColor);
+//        btntoset.setTextColor(textColor);
     }
+
+    // Helper method to load current settings from Firebase
+//    private void loadCurrentSettings() {
+//        FirebaseDatabase.getInstance().getReference("size").get()
+//                .addOnSuccessListener(snapshot -> {
+//                    String currentSize = snapshot.getValue(String.class);
+//                    if (currentSize != null) {
+//                        for (int i = 0; i < sizes.length; i++) {
+//                            if (sizes[i].equals(currentSize)) {
+//                                sizeSpinner.setSelection(i);
+//                                break;
+//                            }
+//                        }
+//                    }
+//                });
+//
+//        FirebaseDatabase.getInstance().getReference("backgroundColor").get()
+//                .addOnSuccessListener(snapshot -> {
+//                    String currentColor = snapshot.getValue(String.class);
+//                    if (currentColor != null) {
+//                        for (int i = 0; i < colors.length; i++) {
+//                            if (colors[i].equals(currentColor)) {
+//                                colorSpinner.setSelection(i);
+//                                break;
+//                            }
+//                        }
+//                    }
+//                });
+//    }
 }

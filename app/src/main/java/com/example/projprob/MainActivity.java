@@ -8,20 +8,16 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btntogame, btntoinst, btntoset;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private FBmodule fbmodule;
+    SettingsActivity settingsActivity;
     private ConstraintLayout mainLayout;
+    public static String staticColorRes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         );
 
         // Initialize Firebase module
-        fbmodule = new FBmodule(this);
+        fbmodule = new FBmodule(this , settingsActivity);
     }
 
     public void updateSize(String size) {
@@ -76,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void updateBackgroundColor(String color) {
         int colorRes;
+        staticColorRes = color;
         switch (color.toLowerCase()) {
             case "black":
                 colorRes = Color.BLACK;
