@@ -8,31 +8,37 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Instructions extends AppCompatActivity implements View.OnClickListener {
 
     private Button back;
     private ConstraintLayout instlayout;
+    private TextView instructionsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
-        init(); // Initializes the back button
+        init();
         updateBackgroundColors();
+        setInstructionsText();
     }
 
     private void init() {
-        back = findViewById(R.id.back_ins); // Back button to return to MainActivity
-        back.setOnClickListener(this); // Listens for clicks on the back button
-
+        back = findViewById(R.id.back_ins);
+        back.setOnClickListener(this);
         instlayout = findViewById(R.id.inst_layout);
+        instructionsText = findViewById(R.id.instructions_text);
+    }
+
+    private void setInstructionsText() {
+        instructionsText.setText(getString(R.string.insts));
     }
 
     @Override
     public void onClick(View v) {
         if (back == v) {
-            // Navigates back to the main activity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -40,7 +46,6 @@ public class Instructions extends AppCompatActivity implements View.OnClickListe
 
     public void updateBackgroundColors() {
         int colorRes;
-
         String color = MainActivity.staticColorRes;
 
         switch (color.toLowerCase()) {
@@ -64,8 +69,8 @@ public class Instructions extends AppCompatActivity implements View.OnClickListe
         }
         instlayout.setBackgroundColor(colorRes);
 
-//        // Update color for all buttons to ensure visibility
         int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
         back.setTextColor(textColor);
+        instructionsText.setTextColor(textColor); // Ensure instructions text is visible
     }
 }
