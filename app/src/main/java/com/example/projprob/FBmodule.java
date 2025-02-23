@@ -9,13 +9,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class FBmodule {
     MainActivity mainActivity;
-    SettingsActivity settingsActivity;
     private static final String SIZE_KEY = "size";
     private static final String COLOR_KEY = "backgroundColor";
 
-    public FBmodule(MainActivity mainActivity , SettingsActivity settingsActivity) {
+    public FBmodule(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
-        this.settingsActivity = settingsActivity;
         setupFirebaseListeners();
     }
 
@@ -29,7 +27,7 @@ public class FBmodule {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String size = snapshot.getValue(String.class);
                 if (size != null) {
-                    mainActivity.updateSize(size);
+                    //mainActivity.updateSize(size);
                 }
             }
 

@@ -1,13 +1,16 @@
 package com.example.projprob;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     Button giveupbtn;
+    private ConstraintLayout gamelayout;
     String size = "4x4"; // Default grid size
 
     @Override
@@ -15,11 +18,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         init(); // Initializes components
+        updateBackgroundColors();
     }
 
     private void init() {
         giveupbtn = findViewById(R.id.giveupbtn); // Button for "Give Up" option
         giveupbtn.setOnClickListener(this); // Listens for clicks on the "Give Up" button
+
+        gamelayout = findViewById(R.id.game_layout);
     }
 
     private void createDialog() {
@@ -33,5 +39,36 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         if (giveupbtn == v) {
             createDialog(); // Shows the custom dialog when the "Give Up" button is clicked
         }
+    }
+
+    public void updateBackgroundColors() {
+        int colorRes;
+
+        String color = MainActivity.staticColorRes;
+
+        switch (color.toLowerCase()) {
+            case "black":
+                colorRes = Color.BLACK;
+                break;
+            case "white":
+                colorRes = Color.WHITE;
+                break;
+            case "blue":
+                colorRes = Color.BLUE;
+                break;
+            case "red":
+                colorRes = Color.RED;
+                break;
+            case "green":
+                colorRes = Color.GREEN;
+                break;
+            default:
+                colorRes = Color.BLACK;
+        }
+        gamelayout.setBackgroundColor(colorRes);
+
+        // Update color for all buttons to ensure visibility
+        int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
+        giveupbtn.setTextColor(textColor);
     }
 }

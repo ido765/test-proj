@@ -104,8 +104,24 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == BackSet) {
+            // Send size to Firebase if selected
+            if (selectedSize != null && !selectedSize.equals("choose grid size")) {
+                FirebaseDatabase.getInstance().getReference()
+                        .child("size")
+                        .setValue(selectedSize);
+            }
+
+            // Send color to Firebase if selected, using "backgroundColor" branch
+            String selectedColor = colorSpinner.getSelectedItem() != null ?
+                    colorSpinner.getSelectedItem().toString() : null;
+            if (selectedColor != null && !selectedColor.equals("choose background color")) {
+                FirebaseDatabase.getInstance().getReference()
+                        .child("backgroundColor")
+                        .setValue(selectedColor);
+            }
+
             // Return to MainActivity
-            // Intent intent = new Intent(this, MainActivity.class);
+            //Intent intent = new Intent(this, MainActivity.class);
             //startActivity(intent);
             finish();
         }
@@ -138,38 +154,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         SettingsLayout.setBackgroundColor(colorRes);
 
 //        // Update color for all buttons to ensure visibility
-//        int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
-//        btntogame.setTextColor(textColor);
-//        btntoinst.setTextColor(textColor);
-//        btntoset.setTextColor(textColor);
+        int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
+        BackSet.setTextColor(textColor);
     }
-
-    // Helper method to load current settings from Firebase
-//    private void loadCurrentSettings() {
-//        FirebaseDatabase.getInstance().getReference("size").get()
-//                .addOnSuccessListener(snapshot -> {
-//                    String currentSize = snapshot.getValue(String.class);
-//                    if (currentSize != null) {
-//                        for (int i = 0; i < sizes.length; i++) {
-//                            if (sizes[i].equals(currentSize)) {
-//                                sizeSpinner.setSelection(i);
-//                                break;
-//                            }
-//                        }
-//                    }
-//                });
-//
-//        FirebaseDatabase.getInstance().getReference("backgroundColor").get()
-//                .addOnSuccessListener(snapshot -> {
-//                    String currentColor = snapshot.getValue(String.class);
-//                    if (currentColor != null) {
-//                        for (int i = 0; i < colors.length; i++) {
-//                            if (colors[i].equals(currentColor)) {
-//                                colorSpinner.setSelection(i);
-//                                break;
-//                            }
-//                        }
-//                    }
-//                });
-//    }
 }

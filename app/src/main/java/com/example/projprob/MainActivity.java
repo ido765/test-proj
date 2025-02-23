@@ -61,14 +61,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         );
 
         // Initialize Firebase module
-        fbmodule = new FBmodule(this , settingsActivity);
+        fbmodule = new FBmodule(this);
     }
 
-    public void updateSize(String size) {
-        // Update UI or game logic based on size
-        Toast.makeText(this, "Size updated: " + size, Toast.LENGTH_SHORT).show();
-        // You can add additional logic here to handle size changes
-    }
+//    public void updateSize(String size) {
+//        // Update UI or game logic based on size
+//        Toast.makeText(this, "Size updated: " + size, Toast.LENGTH_SHORT).show();
+//        // You can add additional logic here to handle size changes
+//    }
 
     public void updateBackgroundColor(String color) {
         int colorRes;

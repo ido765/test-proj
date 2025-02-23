@@ -1,8 +1,10 @@
 package com.example.projprob;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,17 +12,21 @@ import android.widget.Button;
 public class Instructions extends AppCompatActivity implements View.OnClickListener {
 
     private Button back;
+    private ConstraintLayout instlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
         init(); // Initializes the back button
+        updateBackgroundColors();
     }
 
     private void init() {
         back = findViewById(R.id.back_ins); // Back button to return to MainActivity
         back.setOnClickListener(this); // Listens for clicks on the back button
+
+        instlayout = findViewById(R.id.inst_layout);
     }
 
     @Override
@@ -30,5 +36,36 @@ public class Instructions extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void updateBackgroundColors() {
+        int colorRes;
+
+        String color = MainActivity.staticColorRes;
+
+        switch (color.toLowerCase()) {
+            case "black":
+                colorRes = Color.BLACK;
+                break;
+            case "white":
+                colorRes = Color.WHITE;
+                break;
+            case "blue":
+                colorRes = Color.BLUE;
+                break;
+            case "red":
+                colorRes = Color.RED;
+                break;
+            case "green":
+                colorRes = Color.GREEN;
+                break;
+            default:
+                colorRes = Color.BLACK;
+        }
+        instlayout.setBackgroundColor(colorRes);
+
+//        // Update color for all buttons to ensure visibility
+        int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
+        back.setTextColor(textColor);
     }
 }
