@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.Button;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
-    Button giveupbtn;
+    private Button giveupbtn;
     private ConstraintLayout gamelayout;
-    String size = "4x4"; // Default grid size
+    private String size = "4x4"; // Default grid size
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

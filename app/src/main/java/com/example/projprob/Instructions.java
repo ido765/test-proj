@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class Instructions extends AppCompatActivity implements View.OnClickListener {
 
     private Button back;
-    private ConstraintLayout instlayout;
+    private ConstraintLayout inst_layout;
     private TextView instructionsText;
 
     @Override
@@ -28,7 +28,7 @@ public class Instructions extends AppCompatActivity implements View.OnClickListe
     private void init() {
         back = findViewById(R.id.back_ins);
         back.setOnClickListener(this);
-        instlayout = findViewById(R.id.inst_layout);
+        inst_layout = findViewById(R.id.inst_layout);
         instructionsText = findViewById(R.id.instructions_text);
     }
 
@@ -67,7 +67,7 @@ public class Instructions extends AppCompatActivity implements View.OnClickListe
             default:
                 colorRes = Color.BLACK;
         }
-        instlayout.setBackgroundColor(colorRes);
+        inst_layout.setBackgroundColor(colorRes);
 
         int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
         back.setTextColor(textColor);

@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btntogame, btntoinst, btntoset;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private FBmodule fbmodule;
-    SettingsActivity settingsActivity;
     private ConstraintLayout mainLayout;
     public static String staticColorRes;
 
