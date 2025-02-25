@@ -10,6 +10,7 @@
     tools:context=".GameActivity"
     android:id="@+id/game_layout">
 
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/giveupbtn"
         android:layout_width="0dp"
@@ -26,4 +27,16 @@
         app:layout_constraintWidth_percent="0.4"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp" />
+
+    <LinearLayout
+        android:layout_width="388dp"
+        android:layout_height="540dp"
+        android:orientation="vertical"
+        android:id="@+id/game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.364"></LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

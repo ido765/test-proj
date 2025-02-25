@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class FBmodule {
     MainActivity mainActivity;
+
     private static final String SIZE_KEY = "size";
     private static final String COLOR_KEY = "backgroundColor";
 

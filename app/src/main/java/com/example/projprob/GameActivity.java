@@ -7,11 +7,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private Button giveupbtn;
     private ConstraintLayout gamelayout;
     private String size = "4x4"; // Default grid size
+    private Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +21,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_game);
         init(); // Initializes components
         updateBackgroundColors();
+
+        board = new Board(this, 6);
+        LinearLayout linearLayout = findViewById(R.id.game);
+        linearLayout.addView(board);
+        linearLayout.setBackgroundColor(Color.RED);
+
     }
 
     private void init() {
         giveupbtn = findViewById(R.id.giveupbtn); // Button for "Give Up" option
         giveupbtn.setOnClickListener(this); // Listens for clicks on the "Give Up" button
 
+
         gamelayout = findViewById(R.id.game_layout);
+
+
     }
 
     private void createDialog() {
@@ -41,7 +52,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void updateBackgroundColors() {
+    private void updateSize()
+    {
+        int Rsize;
+
+
+
+    }
+
+    public void updateBackgroundColors()
+    {
         int colorRes;
 
         String color = MainActivity.staticColorRes;

@@ -153,7 +153,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
         SettingsLayout.setBackgroundColor(colorRes);
 
-//        // Update color for all buttons to ensure visibility
+        // Update color for all buttons to ensure visibility
         int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
         BackSet.setTextColor(textColor);
     }
