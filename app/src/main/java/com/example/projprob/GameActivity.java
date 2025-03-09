@@ -11,60 +11,61 @@ import android.widget.LinearLayout;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private Button giveupbtn;
-    private ConstraintLayout gamelayout;
+    private MainActivity mainActivity;
+    private LinearLayout gamelayout;
     private String size = "4x4"; // Default grid size
+    private int IntSize = 4; // 4 עבור 4x4 מספרים
     private Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        init(); // Initializes components
-        updateBackgroundColors();
+        init();
+        size = MainActivity.StaticSize != null ? MainActivity.StaticSize : "4x4";
+        IntSize = IntSizer(size);
 
-        board = new Board(this, 6);
+        board = new Board(this, IntSize);
         LinearLayout linearLayout = findViewById(R.id.game);
         linearLayout.addView(board);
-        linearLayout.setBackgroundColor(Color.RED);
-
+        updateBackgroundColors();
     }
 
     private void init() {
-        giveupbtn = findViewById(R.id.giveupbtn); // Button for "Give Up" option
-        giveupbtn.setOnClickListener(this); // Listens for clicks on the "Give Up" button
-
-
+        giveupbtn = findViewById(R.id.giveupbtn);
+        giveupbtn.setOnClickListener(this);
         gamelayout = findViewById(R.id.game_layout);
-
-
     }
 
     private void createDialog() {
-        // Creates and shows a custom dialog
         CustomDialog customDialog = new CustomDialog(this);
         customDialog.show();
+    }
+
+    private int IntSizer(String size) {
+        switch (size) {
+            case "4x4": return 4; // 4x4 מספרים
+            case "5x5": return 5; // 5x5 מספרים
+            case "6x6": return 6; // 6x6 מספרים
+            case "7x7": return 7; // 7x7 מספרים
+            default: return 4;
+        }
     }
 
     @Override
     public void onClick(View v) {
         if (giveupbtn == v) {
-            createDialog(); // Shows the custom dialog when the "Give Up" button is clicked
+            createDialog();
         }
     }
 
-    private void updateSize()
-    {
-        int Rsize;
-
-
-
+    private void updateSize() {
+        // TODO: Implement size update logic
     }
 
-    public void updateBackgroundColors()
-    {
+    public void updateBackgroundColors() {
         int colorRes;
-
-        String color = MainActivity.staticColorRes;
+        String color = MainActivity.staticColorRes != null ? MainActivity.staticColorRes : "black";
 
         switch (color.toLowerCase()) {
             case "black":
@@ -86,8 +87,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 colorRes = Color.BLACK;
         }
         gamelayout.setBackgroundColor(colorRes);
-
-        // Update color for all buttons to ensure visibility
+        LinearLayout linearLayout = findViewById(R.id.game);
+        linearLayout.setBackgroundColor(colorRes);
         int textColor = color.equalsIgnoreCase("white") ? Color.BLACK : Color.WHITE;
         giveupbtn.setTextColor(textColor);
     }

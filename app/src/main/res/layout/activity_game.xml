@@ -1,42 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/game_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_background"
-    android:padding="16dp"
-    tools:context=".GameActivity"
-    android:id="@+id/game_layout">
+    android:orientation="vertical"
+    android:background="@color/colorBlack">
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/giveupbtn"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:text="Give Up?"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:cornerRadius="12dp"
-        app:elevation="6dp"
-        android:backgroundTint="@color/danger_button"
-        android:textColor="@color/button_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.4"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level 1"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
-        android:layout_width="388dp"
-        android:layout_height="540dp"
-        android:orientation="vertical"
         android:id="@+id/game"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364"></LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/erase_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Erase"
+            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/colorDarkerGray"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:id="@+id/pencil_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pencil"
+            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/colorDarkerGray"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:id="@+id/hint_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hint"
+            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/colorDarkerGray"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:id="@+id/giveupbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Give Up?"
+            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/colorRed"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+</LinearLayout>
