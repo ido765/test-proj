@@ -68,18 +68,17 @@ public class Board extends View {
         int boardWidth = getWidth();
         int boardHeight = getHeight() - 150; // הפחתת גובה לכפתורים ולכותרת
 
-        // חישוב גודל התא
-        int squareWidth = boardWidth / size;
-        int squareHeight = boardHeight / size;
+        // חישוב גודל התא כריבוע, בהתבסס על המימד הקטן יותר
+        int squareSize = Math.min(boardWidth / size, boardHeight / size);
 
         for (int i = 0; i < size; i++) {
             for (int k = 0; k < size; k++) {
-                arr[i][k].height = squareHeight;
-                arr[i][k].width = squareWidth;
+                arr[i][k].height = squareSize;
+                arr[i][k].width = squareSize;
             }
         }
 
-        offsetX = 0;
+        offsetX = (getWidth() - (size * squareSize)) / 2; // מרכוז אופקי
         offsetY = 50; // מקום לכותרת
     }
 
