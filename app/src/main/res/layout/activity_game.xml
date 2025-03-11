@@ -4,66 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBlack">
+    android:background="#E0E0E0"
+    android:padding="10dp">
 
+    <!-- לבבות מעל הכותרת -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="❤️ ❤️"
+        android:textColor="#FF0000"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"/>
+
+    <!-- כותרת -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Level 1"
-        android:textColor="@color/colorWhite"
-        android:textSize="24sp"
+        android:textColor="#0000FF"
+        android:textSize="28sp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-medium"/>
 
-    <LinearLayout
-        android:id="@+id/game"
+    <!-- מקום ללוח -->
+    <FrameLayout
+        android:id="@+id/board_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center"/>
+        android:layout_margin="10dp"/>
 
+    <!-- כפתורים -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="10dp">
-
-        <Button
-            android:id="@+id/erase_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Erase"
-            android:textColor="@color/colorWhite"
-            android:backgroundTint="@color/colorDarkerGray"
-            android:layout_margin="5dp"/>
-
-        <Button
-            android:id="@+id/pencil_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pencil"
-            android:textColor="@color/colorWhite"
-            android:backgroundTint="@color/colorDarkerGray"
-            android:layout_margin="5dp"/>
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/hint_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hint"
-            android:textColor="@color/colorWhite"
-            android:backgroundTint="@color/colorDarkerGray"
-            android:layout_margin="5dp"/>
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2196F3"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_button"/>
 
         <Button
-            android:id="@+id/giveupbtn"
+            android:id="@+id/giveup_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Give Up?"
-            android:textColor="@color/colorWhite"
-            android:backgroundTint="@color/colorRed"
-            android:layout_margin="5dp"/>
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FFCDD2"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_button"/>
     </LinearLayout>
 </LinearLayout>

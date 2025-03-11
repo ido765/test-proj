@@ -19,13 +19,17 @@ public class Square {
         this.isLocked = isLocked;
     }
 
-    // Getters ו-Setters קיימים...
+    // Getters ו-Setters
     public int getNum() { return num; }
+    public void setNum(int num) { this.num = num; }
     public boolean isPressed() { return pressed; }
     public void setPressed(boolean pressed) { this.pressed = pressed; }
     public boolean isCorrect() { return isCorrect; }
+    public void setCorrect(boolean isCorrect) { this.isCorrect = isCorrect; }
     public boolean isLocked() { return isLocked; }
+    public void setLocked(boolean isLocked) { this.isLocked = isLocked; }
     public int getRow() { return row; }
     public int getCol() { return col; }
     public boolean shouldBeUsed() { return shouldBeUsed; }
+    public void setShouldBeUsed(boolean shouldBeUsed) { this.shouldBeUsed = shouldBeUsed; }
 }

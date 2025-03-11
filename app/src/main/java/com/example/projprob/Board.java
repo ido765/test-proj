@@ -28,7 +28,7 @@ public class Board extends View {
     private void init() {
         arr = new Square[size][size];
         fillArr(arr);
-        calculateSums();
+        generateRandomSums(); // חישוב סכומים אקראיים במקום calculateSums
     }
 
     private void fillArr(Square[][] arr) {
@@ -41,24 +41,65 @@ public class Board extends View {
                     arr[i][k] = new Square(0, 0, 0, i, k, false, false, false, false); // תאים לסכומים
                 } else {
                     int num = rand.nextInt(9) + 1;
-                    arr[i][k] = new Square(0, 0, num, i, k, true, false, false, false);
+                    boolean shouldBeUsed = rand.nextBoolean(); // החלטה אקראית אם להשתתף בסכום
+                    arr[i][k] = new Square(0, 0, num, i, k, shouldBeUsed, false, false, false);
                 }
             }
         }
     }
 
-    private void calculateSums() {
+    private void generateRandomSums() {
+        Random rand = new Random();
         for (int i = 1; i < size; i++) {
             int sum = 0;
+            int usedCount = 0;
             for (int k = 1; k < size; k++) {
-                sum += arr[i][k].getNum();
+                if (arr[i][k].shouldBeUsed()) {
+                    sum += arr[i][k].getNum();
+                    usedCount++;
+                }
+            }
+            // אם אין מספיק מספרים משתתפים, בחר לפחות 2 מספרים אקראיים
+            if (usedCount < 2) {
+                int[] indices = new int[size - 1];
+                int index = 0;
+                for (int k = 1; k < size; k++) {
+                    indices[index++] = k;
+                }
+                for (int j = 0; j < 2; j++) {
+                    int randomIndex = rand.nextInt(indices.length);
+                    if (!arr[i][indices[randomIndex]].shouldBeUsed()) {
+                        arr[i][indices[randomIndex]].setShouldBeUsed(true);
+                        sum += arr[i][indices[randomIndex]].getNum();
+                    }
+                }
             }
             rowSums[i] = sum;
         }
+
         for (int k = 1; k < size; k++) {
             int sum = 0;
+            int usedCount = 0;
             for (int i = 1; i < size; i++) {
-                sum += arr[i][k].getNum();
+                if (arr[i][k].shouldBeUsed()) {
+                    sum += arr[i][k].getNum();
+                    usedCount++;
+                }
+            }
+            // אם אין מספיק מספרים משתתפים, בחר לפחות 2 מספרים אקראיים
+            if (usedCount < 2) {
+                int[] indices = new int[size - 1];
+                int index = 0;
+                for (int i = 1; i < size; i++) {
+                    indices[index++] = i;
+                }
+                for (int j = 0; j < 2; j++) {
+                    int randomIndex = rand.nextInt(indices.length);
+                    if (!arr[indices[randomIndex]][k].shouldBeUsed()) {
+                        arr[indices[randomIndex]][k].setShouldBeUsed(true);
+                        sum += arr[indices[randomIndex]][k].getNum();
+                    }
+                }
             }
             colSums[k] = sum;
         }
@@ -111,8 +152,9 @@ public class Board extends View {
                 if (i == 0 || k == 0) {
                     paint.setColor(Color.BLUE); // צבע כחול לתאים עם סכומים
                 } else {
-                    paint.setColor(sq.isPressed() ? Color.YELLOW : Color.WHITE); // תאים רגילים לבנים
+                    paint.setColor(sq.isPressed() ? Color.YELLOW : (sq.shouldBeUsed() ? Color.LTGRAY : Color.WHITE)); // תאים רגילים עם סימון שימוש
                 }
+                if (i == 0 && k == 0) paint.setColor(Color.WHITE);
                 canvas.drawRect(x, y, x + sq.width, y + sq.height, paint);
 
                 // מסגרת התא
